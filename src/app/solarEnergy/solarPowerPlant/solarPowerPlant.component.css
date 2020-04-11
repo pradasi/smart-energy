@@ -1,0 +1,8 @@
+.myicon ,.material-icons{
+    transition: all 0.5s ease;
+}
+
+.myicon:hover,.material-icons:hover {
+    transform: scale(1.1);
+   
+}

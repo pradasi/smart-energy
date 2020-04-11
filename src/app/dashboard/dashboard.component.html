@@ -1,0 +1,150 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">flash_on</i>
+                      </div>
+                      <p class="card-category">Energy rquired today</p>
+                      <h3 class="card-title">50,000 
+                          <small>MWh</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i>Updated on {{currDate }}
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">brightness_5</i>
+                      </div>
+                      <p class="card-category">Solar Energy Planned</p>
+                      <h3 class="card-title">34,245
+                        <small>MWh</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i>Updated on {{currDate }}
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header  card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">toys</i>
+                      </div>
+                      <p class="card-category">Wind Energy Planned 
+                       
+                      </p>
+                      <h3 class="card-title">75,00
+                        <small>MWh</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">date_range</i>Updated on {{currDate }}
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">sync</i>
+                      </div>
+                      <p class="card-category">Mismatch of Energy </p>
+                      <h3 class="card-title">245 
+                        <small>MWh</small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">update</i> Just Updated
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card card-chart">
+                  <div class="card-header card-header-warning">
+                      <div class="ct-chart" id="dailySalesChart" data-x-axis="Time (Hours) " data-y-axis="Energy (W)"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Energy required 50,000 Mwh </h4>
+                  
+                      <!-- <p class="card-category">
+                          <span class="text-success"><i class="fa fa-long-arrow-up"></i> 5% </span> increase in energy demand.</p> -->
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> {{currDate}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="card card-chart">
+                  <div class="card-header card-header-success">
+                      <div class="ct-chart" id="websiteViewsChart" data-x-axis="Time (Hours) " data-y-axis="Energy (W)"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Solar Energy </h4>
+                      <p class="card-category"></p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> {{currDate}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="card card-chart">
+                  <div class="card-header card-header-info">
+                      <div class="ct-chart" id="completedTasksChart" data-x-axis="Time (Hours) " data-y-axis="Energy (W)"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Wind Energy</h4>
+                     
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> {{currDate}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="card card-chart">
+                  <div class="card-header card-header-success">
+                      <div class="ct-chart" id="MismatchEnergyChart" data-x-axis="Time (Hours) " data-y-axis="Energy (W)"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Mismatch Energy</h4>
+                     
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">access_time</i> {{currDate}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+      
+  </div>
+</div>

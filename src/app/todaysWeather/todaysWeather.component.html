@@ -1,0 +1,27 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+              <fusioncharts
+              [width]="TheromometerWidth"
+              [height]="TheromometerHeight"
+              [type]="TheromometerType"
+              [dataFormat]="TheromometerDataFormat"
+              [dataSource]="TheromometerDataSource">
+            </fusioncharts>
+            
+            </div>
+            <div class="com-md-6" style="display: inline-block;">
+              <fusioncharts
+              [width]="width"
+              [height]="height"
+              [type]="type"
+              [dataFormat]="dataFormat"
+              [dataSource]="PressureGaugeDataSource"
+            >
+            </fusioncharts>
+            
+            </div>
+          </div>
+    </div>
+</div>
