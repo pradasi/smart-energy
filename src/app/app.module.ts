@@ -33,7 +33,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     RouterModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBqT8fgkm62aVC86O2GokS3IKzCGNVmWYk'
+      apiKey: 'Google_map_key'
+      
     })
   ],
   declarations: [
