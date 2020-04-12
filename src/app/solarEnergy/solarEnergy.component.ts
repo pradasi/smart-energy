@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit,OnInit, ViewChild, ElementRef } from '@angular/core';
 declare var $: any;
 
 declare const google: any;
@@ -15,8 +15,10 @@ draggable?: boolean;
   styleUrls: ['./solarEnergy.component.css']
 })
 export class SolarEnergyComponent implements OnInit {
+
    
   solarPowerPlant
+  
   constructor() { }
   showNotification(from, align){
       const type = ['','info','success','warning','danger'];
@@ -38,109 +40,7 @@ export class SolarEnergyComponent implements OnInit {
   }
   ngOnInit() 
   {
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-        zoom: 13,
-        center: myLatlng,
-        scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        styles: [{
-            "featureType": "water",
-            "stylers": [{
-                "saturation": 43
-            }, {
-                "lightness": -11
-            }, {
-                "hue": "#0088ff"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "hue": "#ff0000"
-            }, {
-                "saturation": -100
-            }, {
-                "lightness": 99
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-                "color": "#808080"
-            }, {
-                "lightness": 54
-            }]
-        }, {
-            "featureType": "landscape.man_made",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ece2d9"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ccdca1"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-                "color": "#767676"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-                "color": "#ffffff"
-            }]
-        }, {
-            "featureType": "poi",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "visibility": "on"
-            }, {
-                "color": "#b8cb93"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.sports_complex",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.medical",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.business",
-            "stylers": [{
-                "visibility": "simplified"
-            }]
-        }]
 
-    };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!"
-    });
-
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-
-   
     this.solarPowerPlant =[
       { 
         id : 0 ,
@@ -177,10 +77,99 @@ export class SolarEnergyComponent implements OnInit {
 
      ] ;
 
-}
+  } 
 
-SolarDetail(id) {
-  console.log("id",id)
-}
+  title = 'angular-gmap';
+    @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
+    map: google.maps.Map;
+    lat = 14.138323;
+    lng = 77.314646;
+    markers = [
+        {
+            position: new google.maps.LatLng(14.138323, 77.314646),
+            map: this.map,
+            title: "Pavagada Solar Park"
+          },
+          {
+            position: new google.maps.LatLng(12.876852, 78.038313),
+            map: this.map,
+            title: "Adani Solar Park"
+          },
+          {
+            position: new google.maps.LatLng(15.552897, 76.431802),
+            map: this.map,
+            title: "Karnataka I Project"
+          },
+          {
+            position: new google.maps.LatLng(12.607107, 77.424753),
+            map: this.map,
+            title: "Solar power plant Ramanagara"
+          },
+          {
+            position: new google.maps.LatLng(11.965167, 76.806878),
+            map: this.map,
+            title: "Bosch Power plant"
+          }
+      ];
+
+    coordinates = new google.maps.LatLng(this.lat, this.lng);
+
+    mapOptions: google.maps.MapOptions = {
+     center: this.coordinates,
+     zoom: 7 ,
+     mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+
+    marker = new google.maps.Marker({
+      position: this.coordinates,
+      map: this.map,
+    });
+
+
+
+    ngAfterViewInit() {
+      this.mapInitializer();
+    } 
+
+    loadAllMarkers(): void {
+        this.markers.forEach(markerInfo => {
+          //Creating a new marker object
+          const marker = new google.maps.Marker({
+            ...markerInfo
+          });
+    
+          //creating a new info window with markers info
+          const infoWindow = new google.maps.InfoWindow({
+            content: marker.getTitle()
+          });
+    
+          //Add click event to open info window on marker
+          marker.addListener("click", () => {
+            infoWindow.open(marker.getMap(), marker);
+          });
+    
+          //Adding marker to google map
+          marker.setMap(this.map);
+        });
+      }
+
+   mapInitializer(): void {
+    this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
+
+    //Adding Click event to default marker
+    this.marker.addListener("click", () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: this.marker.getTitle()
+      });
+      infoWindow.open(this.marker.getMap(), this.marker);
+    });
+
+    //Adding default marker to map
+    this.marker.setMap(this.map);
+
+    //Adding other markers
+    this.loadAllMarkers();
+  }
+
 
 }

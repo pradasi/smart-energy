@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef,OnInit } from 
+'@angular/core';
 import {ActivatedRoute} from '@angular/router' ;
 declare const google: any;
 
@@ -87,8 +88,8 @@ export class SolarPowerPlantComponent implements OnInit {
     this.solarPowerPlant =[
         { 
           id : 0 ,
-          longitute : 12 ,
-          latitute : 13 ,
+          lat : 14.138323,
+          lng : 77.314646,
           name:'Pavagada Solar Park', 
           location:' Palavalli, Karnataka' ,
           area : " 13,000 acres",
@@ -97,8 +98,8 @@ export class SolarPowerPlantComponent implements OnInit {
         },
         { 
           id : 1 ,
-          longitute : 12 ,
-          latitute : 13 ,
+          lat : 12.876852,
+          lng : 78.038313,
            name:'ADANI SOLAR PLANT', 
           location:' Kolar, Karnataka' ,
           area : "2500 Acree ",
@@ -106,8 +107,8 @@ export class SolarPowerPlantComponent implements OnInit {
           image_src : 'adani' ,
         },
         { id : 2 ,
-            longitute : 12 ,
-            latitute : 13 ,
+            lat : 15.552897,
+            lng : 76.431802,
           name:'Karnataka I Project ', 
           location:'Koppal,Karnataka ' ,
           area : " 178 acres",
@@ -115,8 +116,8 @@ export class SolarPowerPlantComponent implements OnInit {
           image_src : 'karnataka' ,
         },
         { id : 3 ,
-           longitute : 12 ,
-            latitute : 13 ,
+            lat : 12.607107,
+            lng : 77.424753,
           name:'Solar power plant', 
           location:'Ramanagara, Karnataka' ,
           area : "92 Acres (approx.)",
@@ -124,8 +125,8 @@ export class SolarPowerPlantComponent implements OnInit {
           image_src : 'ramanagara' ,
         },
         { id :4 ,
-            longitute : 12 ,
-            latitute : 13 ,
+            lat : 11.965167,
+          lng : 76.806878,
           name:'Bosch Power plant ', 
           location:' Chamarajanagar, Karnataka' ,
           area : "1.5 Acres (approx)",
@@ -133,112 +134,55 @@ export class SolarPowerPlantComponent implements OnInit {
           image_src : 'ramanagara' ,
         },
   
-       ] ;
+       ] ; 
 
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-        zoom: 13,
-        center: myLatlng,
-        scrollwheel: false, 
-        styles: [{
-            "featureType": "water",
-            "stylers": [{
-                "saturation": 43
-            }, {
-                "lightness": -11
-            }, {
-                "hue": "#0088ff"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "hue": "#ff0000"
-            }, {
-                "saturation": -100
-            }, {
-                "lightness": 99
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "geometry.stroke",
-            "stylers": [{
-                "color": "#808080"
-            }, {
-                "lightness": 54
-            }]
-        }, {
-            "featureType": "landscape.man_made",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ece2d9"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "color": "#ccdca1"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.fill",
-            "stylers": [{
-                "color": "#767676"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels.text.stroke",
-            "stylers": [{
-                "color": "#ffffff"
-            }]
-        }, {
-            "featureType": "poi",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "landscape.natural",
-            "elementType": "geometry.fill",
-            "stylers": [{
-                "visibility": "on"
-            }, {
-                "color": "#b8cb93"
-            }]
-        }, {
-            "featureType": "poi.park",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.sports_complex",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.medical",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "poi.business",
-            "stylers": [{
-                "visibility": "simplified"
-            }]
-        }]
+       this.googleMapIntialization() ;
 
+    }
+ 
+    googleMapIntialization() {
+        this.lat = this.solarPowerPlant[this.urlID].lat ;
+        this.lng = this.solarPowerPlant[this.urlID].lng ; 
+
+        // lat = 14.138323;
+        // lng = 77.314646;
+
+    this.coordinates = new google.maps.LatLng(this.lat, this.lng);
+
+    const mapOptions: google.maps.MapOptions = {
+     center: this.coordinates,
+     zoom: 17 ,
+     mapTypeId: google.maps.MapTypeId.HYBRID
     };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        title: "Hello World!"
-    });
+    this.marker = new google.maps.Marker({
+      position: this.coordinates,
+      map: this.map,
+    }); 
 
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-  }
-  
+   this.MymapOptions= mapOptions
+
+    }
+
+    title = 'angular-gmap';
+    @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
+    map: google.maps.Map;
+    lat;
+    lng ;
+    coordinates ;
+    marker ;
+    MymapOptions
+    
+    ngAfterViewInit() {
+      this.mapInitializer();
+    }
+
+    mapInitializer() {
+      this.map = new google.maps.Map(this.gmap.nativeElement, 
+      this.MymapOptions);
+      this.marker.setMap(this.map);
+    }
+   }
 
 
 
-}

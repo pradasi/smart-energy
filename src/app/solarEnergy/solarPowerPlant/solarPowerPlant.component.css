@@ -6,3 +6,8 @@
     transform: scale(1.1);
    
 }
+
+#map {
+    height: 500px;
+    width: 90%;
+   }

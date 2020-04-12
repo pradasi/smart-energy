@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import {PredictionService} from '../services/prediction.service' ;
 import * as Chartist from 'chartist';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: [DatePipe]
+  providers: [DatePipe,PredictionService]
 })
 export class DashboardComponent implements OnInit {
   currDate: string
-  date = new Date(); ;
-  constructor(private datePipe: DatePipe) {
+  date = new Date(); 
+  EnergyRequiredLabel
+
+  constructor(private datePipe: DatePipe,private predictionService : PredictionService) 
+  {
     this.currDate = this.datePipe.transform(this.date, 'dd-MMM-yyyy');
    }
   startAnimationForLineChart(chart){
@@ -46,129 +50,70 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   };
-  startAnimationForBarChart(chart){
-      let seq2: any, delays2: any, durations2: any;
-
-      seq2 = 0;
-      delays2 = 80;
-      durations2 = 500;
-      chart.on('draw', function(data) {
-        if(data.type === 'bar'){
-            seq2++;
-            data.element.animate({
-              opacity: {
-                begin: seq2 * delays2,
-                dur: durations2,
-                from: 0,
-                to: 1,
-                easing: 'ease'
-              }
-            });
-        }
-      });
-
-      seq2 = 0;
-  };
+  
   ngOnInit() {
      
-      /************************energy required  ********************************************************/
-      const dataDailySalesChart: any = {
-          labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
-          series: [
-              [500, 250,250,250,250,250,400,600,700,1400,2100,2400,2200,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400]
-          ]
-      };
+      this.callingWeatherForecastAPI()  ;
+     
+  }
+  
 
-     const optionsDailySalesChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 10
-          }),
-          low: 100,
-          high: 3000, 
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+
+  callingWeatherForecastAPI() {
+  //this should be called before calling prediction model 
+  this.predictionService.weatherAPI()
+  this.onCallPredictEnergy("solar") 
+  this.onCallPredictEnergy("wind") 
+  }
+
+  onCallPredictEnergy(type) 
+  {   
+    this.predictionService.onPredictEnergyAPI(type)
+    .subscribe((response)=>{
+      console.log(response)
+      if(type=="solar") {
+        this.onGraphLoad(response,"#SolarEnergy") ;
+        this.onGraphLoadFirst("#TotalEnergyReq")
       }
-
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-      this.startAnimationForLineChart(dailySalesChart);
-      /************************solar energy required  ********************************************************/
-      const datawebsiteViewsChart: any = {
-        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
-        series: [
-          [500, 250,250,250,250,250,400,600,700,1400,2100,2400,2200,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400]
-      ]
-      };
-
-     const optionswebsiteViewsChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 2500, 
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-          
+      else if(type=="wind"){
+        this.onGraphLoad(response,"#WindEnergy") ;
       }
+    })
 
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', datawebsiteViewsChart, datawebsiteViewsChart);
+  }
 
-      this.startAnimationForLineChart(completedTasksChart);
+  onGraphLoad (response ,GraphDivId) 
+  { 
+    
+    this.EnergyRequiredLabel = response.hour ;
+    const dataChart: any = {
+      labels:response.hour ,
+      series: [response.value]
+    };
 
+    const optionsChart: any = { lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: 100,high: 3000, 
+    chartPadding: { top: 0, right: 0, bottom: 0, left: 0},}
 
-      /************************wind energy required  ********************************************************/
+    var Chart = new Chartist.Line(GraphDivId, dataChart, optionsChart);
+    this.startAnimationForLineChart(Chart);
 
-     
+} 
 
-      const dataCompletedTasksChart: any = {
-        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
-        series: [
-          [500, 250,250,250,250,250,400,600,700,1400,2100,2400,2200,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400]
-      ]
-      };
+onGraphLoadFirst(GraphDivId) {
 
-     const optionsCompletedTasksChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 2500, 
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-          
-      }
+  const dataChart: any = {
+    labels: this.EnergyRequiredLabel,
+    series: [
+      [500, 250,250,250,250,250,400,600,700,1400,2100,2400,2200,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400]
+    ]
+  };
+  const optionsChart: any = { lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: 100,high: 3000, 
+    chartPadding: { top: 0, right: 0, bottom: 0, left: 0},}
 
-      var websiteViewsChart = new Chartist.Line('#websiteViewsChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+    var Chart = new Chartist.Line(GraphDivId, dataChart, optionsChart);
+    this.startAnimationForLineChart(Chart);
 
-     
-      this.startAnimationForLineChart(websiteViewsChart);
-      /************************Mismatch  energy required  ********************************************************/
+}
 
-     
-
-      const dataMismatchEnergy: any = {
-        labels: ['1', '2', '3', '4', '5', '6', '7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
-        series: [
-          [500, 250,250,250,250,250,400,600,700,1400,2100,2400,2200,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400],
-          [400, 150,150,150,150,350,500,600,400,1300,2000,1400,2100,2300,2300,2100,2200,1900,1900,2400,1700,900,600,400]
-      ]
-      };
-
-     const optionsMismatchEnergy: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 2500, 
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-          
-      }
-
-      var MismatchEnergyChart = new Chartist.Line('#MismatchEnergyChart', dataMismatchEnergy, optionsMismatchEnergy);
-
-     
-      this.startAnimationForLineChart(MismatchEnergyChart);
-
-
-
-     
-    }
 
 }

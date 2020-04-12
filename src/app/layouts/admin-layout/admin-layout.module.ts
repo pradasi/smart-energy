@@ -30,6 +30,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @NgModule({
@@ -44,7 +48,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
-    FusionChartsModule
+    FusionChartsModule,
+    HttpClientModule,
+    HttpModule
   ],
   declarations: [
     DashboardComponent,
