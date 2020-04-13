@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { WeatherForecastComponent } from '../../weather-forecast/weather-forecast.component';
 import { WindEnergyComponent } from '../../windEnergy/windEnergy.component';
+import {WindPowerPlantComponent} from '../../windEnergy/windPowerPlant/windPowerPlant.component' ;
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
@@ -21,6 +22,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'solarEnergy',  component: SolarEnergyComponent },
     { path: 'solarEnergy/solarPowerPlant/:id',  component: SolarPowerPlantComponent },
     { path: 'windEnergy',  component: WindEnergyComponent },
-    { path: 'windEnergy/windPowerPlant',  component: SolarPowerPlantComponent },
+    { path: 'windEnergy/windPowerPlant/:id',  component: WindPowerPlantComponent },
 ];
 

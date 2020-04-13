@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+//import { HttpModule } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app.routing';
@@ -29,7 +29,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    /*HttpModule,*/
     HttpClientModule,
     ComponentsModule,
     RouterModule,
