@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FusionChartsModule } from 'angular-fusioncharts';
-    import * as FusionCharts from 'fusioncharts';
-    import * as Widgets from 'fusioncharts/fusioncharts.widgets';
-    import * as Charts from 'fusioncharts/fusioncharts.charts' ;
-    import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+import * as FusionCharts from 'fusioncharts';
+import * as Widgets from 'fusioncharts/fusioncharts.widgets';
+import * as Charts from 'fusioncharts/fusioncharts.charts' ;
+import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 
     FusionChartsModule.fcRoot(FusionCharts, Charts,Widgets, FintTheme);
 
@@ -22,6 +22,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { SolarEnergyComponent } from '../../solarEnergy/solarEnergy.component';
 import {SolarPowerPlantComponent} from '../../solarEnergy/solarPowerPlant/solarPowerPlant.component' ;
+import {WindPowerPlantComponent} from '../../windEnergy/windPowerPlant/windPowerPlant.component';
 import { TodaysWeatherComponent } from '../../todaysWeather/todaysWeather.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -30,7 +31,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 
-import { HttpModule } from '@angular/http';
+//import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -50,12 +51,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatTooltipModule,
     FusionChartsModule,
     HttpClientModule,
-    HttpModule
+    /*HttpModule*/
   ],
   declarations: [
     DashboardComponent,
     WeatherForecastComponent,
     WindEnergyComponent,
+    WindPowerPlantComponent,
     TypographyComponent,
     IconsComponent,
     MapsComponent,

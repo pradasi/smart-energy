@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { HttpModule } from '@angular/http';
+//import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FooterComponent } from './footer/footer.component';
@@ -13,7 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   imports: [
     CommonModule,
     RouterModule,
-    HttpModule,
+    /*HttpModule,*/
     HttpClientModule
   ],
   declarations: [

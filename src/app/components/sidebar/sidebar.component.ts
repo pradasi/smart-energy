@@ -14,6 +14,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/solarEnergy', title: 'Solar Energy',  icon:'brightness_5', class: '' },
     { path: '/solarEnergy/solarPowerPlant/0', title: 'Solar Power Plant',  icon:'business', class: '' },
     { path: '/windEnergy', title: 'Wind Energy',  icon:'toys', class: '' },
+    { path: '/windEnergy/windPowerPlant/0', title: 'Wind Power Plant',  icon:'business', class: '' },
     // { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     // { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
