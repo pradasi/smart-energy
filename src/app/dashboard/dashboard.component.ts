@@ -62,8 +62,11 @@ export class DashboardComponent implements OnInit {
   callingWeatherForecastAPI() {
   //this should be called before calling prediction model 
   this.predictionService.weatherAPI()
-  this.onCallPredictEnergy("solar") 
-  this.onCallPredictEnergy("wind") 
+  .subscribe((response)=> {
+    this.onCallPredictEnergy("solar") 
+  })
+   
+  
   }
 
   onCallPredictEnergy(type) 
@@ -73,7 +76,7 @@ export class DashboardComponent implements OnInit {
       console.log(response)
       if(type=="solar") {
         this.onGraphLoad(response,"#SolarEnergy") ;
-        this.onGraphLoadFirst("#TotalEnergyReq")
+        this.onGraphLoadFirst("#TotalEnergyReq") 
       }
       else if(type=="wind"){
         this.onGraphLoad(response,"#WindEnergy") ;
@@ -90,12 +93,26 @@ export class DashboardComponent implements OnInit {
       labels:response.hour ,
       series: [response.value]
     };
-
-    const optionsChart: any = { lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: 100,high: 3000, 
+    let optionsChart: any = { lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: 100,high: 3000, 
     chartPadding: { top: 0, right: 0, bottom: 0, left: 0},}
+   
+    if(GraphDivId=="#WindEnergy") {
+       optionsChart = { lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: 0,high: 9, 
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0},}
+  
+    }
+    
+
+
+    
 
     var Chart = new Chartist.Line(GraphDivId, dataChart, optionsChart);
     this.startAnimationForLineChart(Chart);
+
+    if(GraphDivId=="#SolarEnergy") {
+      //once the graph is loaded for solar then only call 
+      this.onCallPredictEnergy("wind") 
+    }
 
 } 
 

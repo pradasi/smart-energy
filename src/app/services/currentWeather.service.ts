@@ -11,10 +11,23 @@ export class CurrentWeatherService {
   baseUrl = environment.baseUrl; 
   constructor(@Inject(HttpClient) private http: HttpClient) { }
 
+tryDemo(){
+  
+   this.http.get(this.baseUrl+ 'SmartEnergy/weather-forecast') ;
+}
+
+getCurrentWeather() {
+
+
+  return this.http.get(this.baseUrl+ 'SmartEnergy/current-weather-report') ;
+
+
+}
+
 getTodaysWeather() :Observable<any>
 {
     
-    return this.http.get(this.baseUrl+ 'SmartEnergy/today-weather') ;
+  return this.http.get(this.baseUrl+ 'SmartEnergy/today-weather') ;
     
 }
 

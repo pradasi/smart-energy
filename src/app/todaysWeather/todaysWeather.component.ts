@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as Chartist from 'chartist';
 import {CurrentWeatherService} from '../../app/services/currentWeather.service'
 @Component({
   selector: 'app-todaysWeather',
@@ -7,19 +8,91 @@ import {CurrentWeatherService} from '../../app/services/currentWeather.service'
   providers :[CurrentWeatherService]
 })
 export class TodaysWeatherComponent implements OnInit {
+  startAnimationForLineChart(chart){
+    let seq: any, delays: any, durations: any;
+    seq = 0;
+    delays = 80;
+    durations = 500;
 
+    chart.on('draw', function(data) {
+      if(data.type === 'line' || data.type === 'area') {
+        data.element.animate({
+          d: {
+            begin: 600,
+            dur: 700,
+            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+            to: data.path.clone().stringify(),
+            easing: Chartist.Svg.Easing.easeOutQuint
+          }
+        });
+      } else if(data.type === 'point') {
+            seq++;
+            data.element.animate({
+              opacity: {
+                begin: seq * delays,
+                dur: durations,
+                from: 0,
+                to: 1,
+                easing: 'ease'
+              }
+            });
+        }
+    });
+
+    seq = 0;
+};
   constructor(public weatherService : CurrentWeatherService) { }
-  weatherData ;
+  TodaysweatherData ;
+  currentWeatherData ;
+
+  myClass 
+
+  tempArray : string[]
+  pressureArray :string []
+  windSpeedArray :string []
+  timeArray : string[]
+  
   ngOnInit() 
   
   { 
+    this.timeArray= []
+    this.tempArray= []
+    this.windSpeedArray= []
+    this.pressureArray= [] 
+    var response=this.weatherService.tryDemo() ;
+    console.log("myresonse",response)
+    this.myClass="tempClass" ;
+    this.weatherService.getCurrentWeather().subscribe((response)=> 
+    {
+        this.currentWeatherData=response ;
+        
+    })
    
       this.weatherService.getTodaysWeather()
       .subscribe(
         (response)=>{
-          this.weatherData=response ;
-          this.updateGaugeChartData() ;
+          this.TodaysweatherData=response ;
+
+           this.TodaysweatherData.data.forEach(obj => {
+         
+                this.timeArray.push(obj.time) ;
+                var temp =obj.temperature.split(" ")
+                this.tempArray.push(temp[0]) ;
+
+                var wind =obj.windSpeed.split(" ")
+                this.windSpeedArray.push(wind[0]) ;
+
+                var p =obj.pressure.split(" ")
+                this.pressureArray.push(p[0]) ;
+          });
+          console.log(this.timeArray)
+          this.onGraphLoadFirst(this.timeArray,this.tempArray,20,100)
         }) ;
+
+      
+      
+
+
         this.data_thermometer = {
           chart: {
             caption: "Today's Temperature",
@@ -32,7 +105,9 @@ export class TodaysWeatherComponent implements OnInit {
             gaugebordercolor: "#008ee4",
             gaugeborderthickness: "2",
             theme: "candy",
-            showvalue: "1"
+            exportEnabled: 1,
+            bgColor: "#000047,#FFFFFF",
+           
           },
           value:"94"
         };
@@ -40,6 +115,9 @@ export class TodaysWeatherComponent implements OnInit {
     
         this.data_pressureGauge = {
           chart: {
+        
+              "showhovereffect": "1" ,
+        
             caption: "Today's Wind Speed",
             subcaption: "Kmph",
             captionpadding: "0",
@@ -57,7 +135,8 @@ export class TodaysWeatherComponent implements OnInit {
             minortmthickness: "1",
             minortmnumber: "1",
             showgaugeborder: "0",
-            theme: "candy"
+            theme: "candy" ,
+            bgColor: "#000047,#FFFFFF",
           },
           colorrange: {
             color: [
@@ -109,23 +188,58 @@ export class TodaysWeatherComponent implements OnInit {
   
   data_thermometer ;
   TheromometerDataSource ;
-  TheromometerWidth = 500;
-  TheromometerHeight = 400;
+  TheromometerWidth = 530;
+  TheromometerHeight = 350;
   TheromometerType = "thermometer";
   TheromometerDataFormat = "json";
 
-  width = 500;
-  height = 400;
+  width = 530;
+  height = 350;
   type = "angulargauge";
   dataFormat = "json";
   PressureGaugeDataSource ;
   data_pressureGauge ;
 
-  updateGaugeChartData() 
-  {
-    console.log("temp",this.weatherData.data[0])
+
+  
+  onGraphLoadFirst(label,value,min,max) {
+
+    const dataChart: any = {
+      labels:  label,
+      series: [value]
+    };
+   console.log("label",dataChart.labels)
+   console.log("value",dataChart.series)
+  
+
+    const optionsChart: any = {
+      
+      lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: min,high:max , 
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+    }
+  
+     var Chart = new Chartist.Line("#Temperature", dataChart, optionsChart);
+     this.startAnimationForLineChart(Chart);
+    
   }
   
+
+  changeGraph(type) {
+    if(type=='temp') 
+    {
+        this.onGraphLoadFirst(this.timeArray,this.tempArray,20,100)
+        this.myClass="tempClass" ;
+    }
+    else if (type=="wind"){
+      this.onGraphLoadFirst(this.timeArray,this.windSpeedArray,0,50)
+      this.myClass="windClass"
+    }
+    else if(type=="pressure"){
+      this.onGraphLoadFirst(this.timeArray,this.pressureArray,0,50)
+      this.myClass="pressureClass"
+      
+    }
+  }
   
 
   
