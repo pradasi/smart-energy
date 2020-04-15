@@ -1,4 +1,26 @@
+[data-x-axis]::before {
+  content: attr(data-x-axis);
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  bottom: 0;
+  font-size: 11px;
+  color: white;
+  font-weight: bold;
+}
 
+[data-y-axis]::after {
+  content: attr(data-y-axis);
+  position: absolute;
+  top: 50%;
+  left: -35px;
+  font-size: 11px;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  transform: rotate(-90deg)translateY(50%);
+}
  
  .forecast-container {
    width: 100%;

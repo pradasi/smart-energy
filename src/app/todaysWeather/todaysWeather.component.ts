@@ -51,10 +51,18 @@ export class TodaysWeatherComponent implements OnInit {
   pressureArray :string []
   windSpeedArray :string []
   timeArray : string[]
-  
+  imageIcon ;
   ngOnInit() 
   
-  { 
+  {  
+    this.imageIcon= {
+      'Partly Cloudy' : 'icon-5',
+      'Plenty of sun' : 'icon-1' ,
+      'Mostly sunny' : 'icon-1' ,
+      'More sun than clouds' :'icon-3' ,
+      'rainy' :'icon-14' ,
+      'thunderstorm' :'icon-12'
+    }
     this.timeArray= []
     this.tempArray= []
     this.windSpeedArray= []
@@ -86,7 +94,7 @@ export class TodaysWeatherComponent implements OnInit {
                 this.pressureArray.push(p[0]) ;
           });
           console.log(this.timeArray)
-          this.onGraphLoadFirst(this.timeArray,this.tempArray,20,100)
+          this.onGraphLoadFirst(this.timeArray,this.tempArray,70,90)
         }) ;
 
       
@@ -106,7 +114,7 @@ export class TodaysWeatherComponent implements OnInit {
             gaugeborderthickness: "2",
             theme: "candy",
             exportEnabled: 1,
-            bgColor: "#000047,#FFFFFF",
+           // bgColor: "#000047,#FFFFFF",
            
           },
           value:"94"
@@ -136,7 +144,7 @@ export class TodaysWeatherComponent implements OnInit {
             minortmnumber: "1",
             showgaugeborder: "0",
             theme: "candy" ,
-            bgColor: "#000047,#FFFFFF",
+            //bgColor: "#000047,#FFFFFF",
           },
           colorrange: {
             color: [
@@ -188,12 +196,12 @@ export class TodaysWeatherComponent implements OnInit {
   
   data_thermometer ;
   TheromometerDataSource ;
-  TheromometerWidth = 530;
+  TheromometerWidth = 450;
   TheromometerHeight = 350;
   TheromometerType = "thermometer";
   TheromometerDataFormat = "json";
 
-  width = 530;
+  width = 450;
   height = 350;
   type = "angulargauge";
   dataFormat = "json";
@@ -227,7 +235,7 @@ export class TodaysWeatherComponent implements OnInit {
   changeGraph(type) {
     if(type=='temp') 
     {
-        this.onGraphLoadFirst(this.timeArray,this.tempArray,20,100)
+        this.onGraphLoadFirst(this.timeArray,this.tempArray,60,90)
         this.myClass="tempClass" ;
     }
     else if (type=="wind"){
