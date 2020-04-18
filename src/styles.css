@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+@font-face {
+  font-family: Raleway;
+  src: url(assets/Raleway/Raleway-Regular.ttf) format("opentype");
+}
 /*!
  * Start Bootstrap - Business Casual v5.0.9 (https://startbootstrap.com/template-overviews/business-casual)
  * Copyright 2013-2019 Start Bootstrap
