@@ -1,0 +1,27 @@
+<div class="mycontainer">
+    <div id="form_login">
+        <form  #LoginForm="ngForm" (ngSubmit)="Onlogin(LoginForm)">
+    
+                        <div class="header content" >ATC
+                        </div>
+                       
+                            
+                       
+                        <div class="form-group">
+                            <label for="email" class='content'>Email</label>
+                            <input type="email" id="email" class="form-control" name="email" ngModel required email>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class='content'>password</label>
+                            <input type="password" id="password" class="form-control" name="password" ngModel required minlength="6"> 
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-info"  >Login </button> 
+                        </div>
+    
+       </form>
+            <div *ngIf="errorMessage.length" class="alert alert-danger" role="alert">
+                {{errorMessage}}
+            </div>   
+    </div>
+    </div>

@@ -17,9 +17,6 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { WeatherForecastComponent } from '../../weather-forecast/weather-forecast.component';
 import { WindEnergyComponent } from '../../windEnergy/windEnergy.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { MapsComponent } from '../../maps/maps.component';
 import { SolarEnergyComponent } from '../../solarEnergy/solarEnergy.component';
 import {SolarPowerPlantComponent} from '../../solarEnergy/solarPowerPlant/solarPowerPlant.component' ;
 import {WindPowerPlantComponent} from '../../windEnergy/windPowerPlant/windPowerPlant.component';
@@ -57,9 +54,6 @@ import { HttpClientModule } from '@angular/common/http';
     WeatherForecastComponent,
     WindEnergyComponent,
     WindPowerPlantComponent,
-    TypographyComponent,
-    IconsComponent,
-    MapsComponent,
     SolarEnergyComponent,
     TodaysWeatherComponent,
     SolarPowerPlantComponent,

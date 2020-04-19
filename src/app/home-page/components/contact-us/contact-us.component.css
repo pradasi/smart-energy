@@ -1,0 +1,20 @@
+
+
+.page-section{
+
+    margin-left: 160px;
+}
+
+
+
+.intro-text{left:0;width:60%;margin-top:3rem;position:absolute}
+    
+.intro .intro-text .intro-button{width:100%;left:0;position:absolute;bottom:-2rem}
+
+  .mySmallerDiv{
+      width: 50%;
+      margin-top: -100px;
+     opacity: 0.9;
+     margin-left: 330px;
+  }
+  

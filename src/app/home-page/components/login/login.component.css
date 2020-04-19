@@ -1,0 +1,49 @@
+#form_login {
+    border: 1px solid white ;
+     border-radius: 5px ;
+    padding: 4.5em ;
+    background-color: white;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+.mycontainer
+{
+    height:100vh;
+    background-image: url('/assets/background/cloudy01.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.btn-info{
+    width: 100%;
+}
+.content{
+    color: black ;;
+}
+.header{
+    font-size: 2.04em;
+    text-align: center;
+}
+
+/* #### Mobile Phones Portrait or Landscape #### */
+@media screen and (max-device-width: 640px)
+{
+    .header{
+        font-weight: bold;
+    }
+    .content{
+        font-size: 0.9em;
+    }
+
+    input,.btn-info{
+        width: 8em ;
+        height: 2.5em;
+    }
+}
+
+

@@ -7,11 +7,14 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { RouterModule } from '@angular/router';
 import {HomePageRoutes} from './home-page.routing' ;
 
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
-  declarations: [HomePageComponent, HomeDetailsComponent, AboutUsComponent, ContactUsComponent],
+  declarations: [HomePageComponent, HomeDetailsComponent, AboutUsComponent, ContactUsComponent, LoginComponent],
   imports: [
     CommonModule,
+    HttpClientModule,
     RouterModule.forChild(HomePageRoutes),
   ]
 })

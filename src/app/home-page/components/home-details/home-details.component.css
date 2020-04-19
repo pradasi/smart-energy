@@ -1,18 +1,42 @@
 
 
-.img-container{
-    width:100%;
-    height:80%;
-    position: relative;
-    display: inline-block;
-    margin:5px;
-    margin-left: 150px;
+.page-section{
+
+    margin-left: 300px;
 }
-.img-text{
-    top:25%;
-    width:100%;
-    height:100%;
-    /* margin-top: -25px; */
-    position: absolute;
-    display:block;
-}
+
+
+
+.intro-text{left:0;width:60%;margin-top:3rem;position:absolute}
+    
+.intro .intro-text .intro-button{width:100%;left:0;position:absolute;bottom:-2rem}
+
+  .mySmallerDiv{
+      width: 40%;
+      margin-top: -400px;
+     opacity: 0.9;
+     margin-left: 50px;
+  }
+  .mybtn{
+    background-color: rgba(230,167,86,.9);
+
+  }
+  .myBiggerDiv{
+      width: 100%; 
+      opacity: 0.9;
+      background-color: rgba(230,167,86,.9);
+      padding: 100px;
+  }
+
+  .borderProp{
+      border: 1px solid white;
+     
+  }
+
+  .outer {
+    background-clip: content-box;
+    padding:0px 15px 0px 15px;
+    border: 5px solid white ;
+    border-radius: 5px;
+  }
+

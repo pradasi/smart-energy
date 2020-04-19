@@ -14,9 +14,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { WindEnergyComponent } from './windEnergy/windEnergy.component';
-import { TypographyComponent } from './typography/typography.component';
-import { IconsComponent } from './icons/icons.component';
-import { MapsComponent } from './maps/maps.component';
+
 import { SolarEnergyComponent } from './solarEnergy/solarEnergy.component';
 
 import {
