@@ -11,17 +11,16 @@ export class PredictionService {
   baseUrl = environment.baseUrl; 
   constructor(@Inject(HttpClient) private http: HttpClient) { }
 
-  weatherAPI() 
-{
-    
-    return this.http.get(this.baseUrl+ 'SmartEnergy/weather-forecast') ;
-    
+weatherSolarAPI(){
+  return this.http.get(this.baseUrl+ 'SmartEnergy/weather-forecast-solar') ;
+}
+
+weatherWindAPI(){
+  return this.http.get(this.baseUrl+ 'SmartEnergy/weather-forecast-wind') ;
 }
 
 onPredictEnergyAPI(type) {
-
-    return this.http.get(this.baseUrl+ 'SmartEnergy/predict/'+type) ;
-    
+  return this.http.get(this.baseUrl+ 'SmartEnergy/predict/'+type) ;  
 }
 
 
