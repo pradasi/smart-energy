@@ -61,9 +61,13 @@ export class DashboardComponent implements OnInit {
 
   callingWeatherForecastAPI() {
   //this should be called before calling prediction model 
-  this.predictionService.weatherAPI()
+  this.predictionService.weatherSolarAPI()
   .subscribe((response)=> {
     this.onCallPredictEnergy("solar") 
+  })
+  this.predictionService.weatherWindAPI()
+  .subscribe((response)=> {
+    this.onCallPredictEnergy("wind") 
   })
    
   
@@ -109,10 +113,6 @@ export class DashboardComponent implements OnInit {
     var Chart = new Chartist.Line(GraphDivId, dataChart, optionsChart);
     this.startAnimationForLineChart(Chart);
 
-    if(GraphDivId=="#SolarEnergy") {
-      //once the graph is loaded for solar then only call 
-      this.onCallPredictEnergy("wind") 
-    }
 
 } 
 
