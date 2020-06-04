@@ -5,7 +5,7 @@
             <div class="card-header card-header-danger">
                 <h3 class="card-title  pull-right form-group ">
                     <b>{{solarPowerPlant[urlID].name}}</b> </h3>
-                <span>
+                <!-- <span>
                      <div class="row">
                         <div class="col-lg-4 form-group ">
                             <select class="form-control" id="sel1" style="color: white;" >
@@ -16,10 +16,10 @@
                      </div>
                         
                         
-                </span>
-                <p class="card-category pull-right form-group">
+                </span> -->
+                <!-- <p class="card-category pull-right form-group">
                     
-                </p>
+                </p> -->
             </div>
             <br><br>
             <div class="card-body table-responsive">
@@ -37,7 +37,7 @@
                                     </div>
                                   
                                 </div>
-                                <br><br><br><br><br>
+                                <br><br>
                                 <div class="card-header card-header-success card-header-icon myicon" style="padding-left: 70px;">
                                     <br>
                                     <div class="card-icon rounded-circle " style="padding:20px;">
@@ -63,7 +63,7 @@
                                     </div>
                                   
                                 </div>
-                                <br><br><br><br><br><br>
+                                <br><br><br>
                                 <div class="card-header card-header-info card-header-icon myicon">
                                     <br>
                                     <div class="card-icon rounded-circle " style="padding:20px;">
@@ -78,7 +78,7 @@
 
                             </div>
 
-                            <div class="col-lg-6" >
+                            <div class="col-lg-6"  >
                                 
                                     <!-- <div id="map" style="height: 70%;"></div> -->
                                     <div #mapContainer id="map"></div>
@@ -93,10 +93,59 @@
                 
             </div>
   
-  <br><br><hr><br><br>
+  <hr><br>
     <div class="row">
       
-            <div class="col-lg-6" style="margin-left:20px;">
+            <div class="col-lg-5" style="margin-left:80px;">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">{{solarPowerPlant[urlID].name}}</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <!-- <div class="card-body table-responsive">
+                        <h4><b>Average Power generation : 120 MegaWatt </b></h4>
+                        <h4><b>Maximum Power generation : 220 MegaWatt </b></h4>
+                        <h4><b>Current Power generation : 150 MegaWatt </b></h4><br>
+                        <h4><b>Power failure : NIL </b></h4>
+                        <h4><b>Other Emergency: NIL </b></h4>
+                    </div> -->
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-danger">
+                                <th>Condition </th>
+                                <th>Current Status </th>
+                               
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Average Power generation</td> <td>120 MegaWatt</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Maximum Power generation</td> <td> 220 MegaWatt </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Current Power generation </td> <td>150 MegaWatt </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Power failure</td> <td>Nill</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Other Emergency</td> <td>Nill</td>
+                                </tr>
+                                
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+               
+            </div>
+    
+            <div class="col-lg-5" style="margin-left:25px;">
                 <fusioncharts
                 [width]="width"
                 [height]="height"
@@ -106,31 +155,15 @@
                 >
                 </fusioncharts>
             </div>
-    
-            <div class="col-lg-5">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title">{{solarPowerPlant[urlID].name}}</h4>
-                        <p class="card-category"></p>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <h4><b>Average Power generation : 120 MegaWatt </b></h4>
-                        <h4><b>Maximum Power generation : 220 MegaWatt </b></h4>
-                        <h4><b>Current Power generation : 150 MegaWatt </b></h4><br>
-                        <h4><b>Power failure : NIL </b></h4>
-                        <h4><b>Other Emergency: NIL </b></h4>
-                    </div>
-                </div>
-            </div>
       
 
     </div>
     <br><hr><br>
     <div class="row">
         <h3 style="margin-left: 40%;">Photo Gallery </h3> <br>
-    <div class="col-lg-7 " style="margin-left: 15%;"> 
+    <div class="col-md-6" style="margin-left: 20%;" > 
         
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="align-items: center;">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img class="d-block w-100 rounded-sm" src='{{"assets/images/solarPowerPlant/"+solarPowerPlant[urlID].image_src+"/1.jpg"}}' alt="First slide">
@@ -155,7 +188,71 @@
     </div>
             
 </div>
-   <br><br><br><br>
+   <br><br>
+   <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Controls</h4>
+                    <p class="card-category"></p>
+                </div>
+              
+                <div class="card-body table-responsive actionTable">
+                    <table class="table table-hover">
+                        <thead class="text-danger">
+                            <th>Status </th>
+                            <th>Action </th>
+                           
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-size: medium;">Failure in the Grid <br>
+                                    <b style="color:red">
+                                        Turn it Off  manually
+                                 </b> </td> 
+                                
+                                <td > 
+                                    <div class="mid">
+
+                                        <label class="rocker">
+                                          <input type="checkbox" checked>
+                                          <span class="switch-left">On</span>
+                                          <span class="switch-right">Off</span>
+                                        </label>
+                                      
+                                      </div>
+                                </td>
+                            </tr>                          
+                            <tr>
+                               
+                                <td style="font-size: large;"> 
+                                        {{solarPanel }} % of Solar Panels are in Use
+                                        <br><br>
+                                        <!-- <label>Change the Percentage of solar panel in use</label><br>
+                                        <input type="number" class="form-control-sm" placeholder="" #solarPanel1  ><br>
+                                        <button type="submit"  class="btn btn-info" (click)="changeSolarChart(solarPanel1.value)">Change</button> -->
+                                </td> 
+                               
+                               <td>
+                                <fusioncharts
+                                [width]="width2"
+                                [height]="height2"
+                                [type]="type2"
+                                [dataFormat]="dataFormat2"
+                                [dataSource]="PressureGaugeDataSource"
+                              >
+                              </fusioncharts>
+                               </td>
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+   </div>
+   <br><br>
 </div>
 </div>
 </div>

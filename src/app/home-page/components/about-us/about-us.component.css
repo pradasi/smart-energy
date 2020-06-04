@@ -55,3 +55,46 @@
 img{
   z-index: 1;
 } */
+
+
+
+.mypage-section{
+
+  margin-left: 300px;
+}
+
+
+
+.intro-text{left:0;width:60%;margin-top:3rem;position:absolute}
+  
+.intro .intro-text .intro-button{width:100%;left:0;position:absolute;bottom:-2rem}
+
+.mySmallerDiv{
+    width: 75%;
+    margin-top: 30px;
+   opacity: 0.9;
+   margin-left: 125px;
+}
+.mybtn{
+  background-color: rgba(230,167,86,.9);
+
+}
+.myBiggerDiv{
+    width: 100%; 
+    opacity: 0.9;
+    background-color: rgba(230,167,86,.9);
+    padding: 100px;
+}
+
+.borderProp{
+    border: 1px solid white;
+   
+}
+
+.outer {
+  background-clip: content-box;
+  padding:0px 15px 0px 15px;
+  border: 5px solid white ;
+  border-radius: 5px;
+}
+
