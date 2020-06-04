@@ -50,6 +50,17 @@ minTemperatureArray : string[]
 maxTemperatureArray : string[]
 timeArray : string[]
 
+getImageIcon (description){
+  if (description.includes('showers')) {
+    return 'icon-14' ;
+  }
+  else if(description.includes('thunderstorm')) return 'icon-12' ;
+  else if(description.includes('rainy')) return 'icon-14' ;
+  else if(description.includes('cloudy')) return 'icon-5' ;
+  else if(description.includes('Mostly sunny')) return 'icon-1' ;
+  else if(description.includes('sun')) return 'icon-1' ;
+  else return 'icon-5' ;
+}
 
   ngOnInit() {
 
@@ -63,6 +74,9 @@ timeArray : string[]
       'thunderstorm' :'icon-12'
     }
 
+
+   
+
     this.minTemperatureArray=[]
     this.maxTemperatureArray =[]
     this.timeArray=[]
@@ -72,7 +86,7 @@ timeArray : string[]
         
           this.WeeklyWeatherData = response  ;
 
-
+              console.log("weather data",this.WeeklyWeatherData)
       this.WeeklyWeatherData.forEach(obj=>
         {
         var myDate= obj.date.split(" ") ;
@@ -107,6 +121,7 @@ timeArray : string[]
       
       lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: min,high:max , 
       chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+      height : "250px"
     }
   
      var Chart = new Chartist.Line("#Temperature", dataChart, optionsChart);
