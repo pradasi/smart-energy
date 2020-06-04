@@ -52,7 +52,7 @@ const data = {
     dials: {
       dial: [
         {
-          value: "0.3",
+          value: "25.3",
           tooltext: "Moderate Pressure"
         }
       ]
@@ -67,7 +67,7 @@ export class SolarPowerPlantComponent implements OnInit {
   
   solarPowerPlant
   width = 450;
-  height = 400;
+  height = 350;
   type = "angulargauge";
   dataFormat = "json";
   dataSource = data;
@@ -80,11 +80,94 @@ export class SolarPowerPlantComponent implements OnInit {
         this.urlID= params['id'] ;
     }) 
 }
-
+width2 = 300;
+height2 = 200;
+type2 = "angulargauge";
+dataFormat2 = "json";
+PressureGaugeDataSource ;
+data_pressureGauge ;
+solarPanel
 
   ngOnInit() {
-
+    this.solarPanel = 87 
+    this.data_pressureGauge = {
+      chart: {
     
+          "showhovereffect": "1" ,
+    
+        caption: "",
+        subcaption: "",
+        captionpadding: "0",
+        origw: "320",
+        origh: "300",
+        gaugeouterradius: "115",
+        gaugestartangle: "270",
+        gaugeendangle: "-25",
+        showvalue: "1",
+        valuefontsize: "30",
+        majortmnumber: "13",
+        majortmthickness: "2",
+        majortmheight: "13",
+        minortmheight: "7",
+        minortmthickness: "1",
+        minortmnumber: "1",
+        showgaugeborder: "0",
+        theme: "candy" ,
+        //bgColor: "#000047,#FFFFFF",
+      },
+      colorrange: {
+        color: [
+          {
+            minvalue: "0",
+            maxvalue: "15",
+            code: "#d9534f"
+          },
+          {
+            minvalue: "15",
+            maxvalue: "30",
+            code: "#5bc0de"
+          },
+          {
+            minvalue: "30",
+            maxvalue: "80",
+            code: "#f0ad4e"
+          },
+          {
+            minvalue: "80",
+            maxvalue: "100",
+            code: "#5cb85c"
+          }
+        ]
+      },
+      dials: {
+        dial: [
+          {
+            value: this.solarPanel,
+            bgcolor: "#F20F2F",
+            basewidth: "8"
+          }
+        ]
+      },
+      annotations: {
+        groups: [
+          {
+            items: [
+              {
+                type: "text",
+                id: "text",
+                text: "",
+                x: "$gaugeCenterX",
+                y: "$gaugeCenterY + 40",
+                fontsize: "20",
+                color: "#555555"
+              }
+            ]
+          }
+        ]
+      }
+    } ;
+    this.PressureGaugeDataSource=this.data_pressureGauge ;
+
     this.solarPowerPlant =[
         { 
           id : 0 ,
@@ -149,6 +232,8 @@ export class SolarPowerPlantComponent implements OnInit {
 
     this.coordinates = new google.maps.LatLng(this.lat, this.lng);
 
+    
+
     const mapOptions: google.maps.MapOptions = {
      center: this.coordinates,
      zoom: 17 ,
@@ -158,6 +243,7 @@ export class SolarPowerPlantComponent implements OnInit {
     this.marker = new google.maps.Marker({
       position: this.coordinates,
       map: this.map,
+      title: this.getCustomTitle() 
     }); 
 
    this.MymapOptions= mapOptions
@@ -182,7 +268,17 @@ export class SolarPowerPlantComponent implements OnInit {
       this.MymapOptions);
       this.marker.setMap(this.map);
     }
+
+    getCustomTitle() {
+        return 'Power Plant : '+this.solarPowerPlant[this.urlID].name + "\n Maximum Power Generation :240MegaWatt "+ 
+          "\nCurrent power generation :120 MegaWatt\n\n"+ 'Status: No Issue' ;
+    }
+
+   changeSolarChart(value) {
+     this.solarPanel= value ;
+        this.ngOnInit();
    }
+  }
 
 
 

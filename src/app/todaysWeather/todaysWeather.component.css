@@ -13,7 +13,7 @@
     content: attr(data-y-axis);
     position: absolute;
     top: 50%;
-    left: -20px;
+    left: -30px;
     font-size: 11px;
     color: white;
     text-align: center;

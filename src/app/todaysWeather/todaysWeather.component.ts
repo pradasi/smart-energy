@@ -8,6 +8,7 @@ import {CurrentWeatherService} from '../../app/services/currentWeather.service'
   providers :[CurrentWeatherService]
 })
 export class TodaysWeatherComponent implements OnInit {
+  ylabel
   startAnimationForLineChart(chart){
     let seq: any, delays: any, durations: any;
     seq = 0;
@@ -94,7 +95,8 @@ export class TodaysWeatherComponent implements OnInit {
                 this.pressureArray.push(p[0]) ;
           });
           console.log(this.timeArray)
-          this.onGraphLoadFirst(this.timeArray,this.tempArray,70,90)
+          this.ylabel = "Temperature (F) "
+          this.onGraphLoadFirst(this.timeArray,this.tempArray,70,90,this.ylabel)
         }) ;
 
       
@@ -121,6 +123,7 @@ export class TodaysWeatherComponent implements OnInit {
         };
         this.TheromometerDataSource = this.data_thermometer;
     
+        
         this.data_pressureGauge = {
           chart: {
         
@@ -210,7 +213,7 @@ export class TodaysWeatherComponent implements OnInit {
 
 
   
-  onGraphLoadFirst(label,value,min,max) {
+  onGraphLoadFirst(label,value,min,max,yaxisLabel) {
 
     const dataChart: any = {
       labels:  label,
@@ -223,10 +226,28 @@ export class TodaysWeatherComponent implements OnInit {
     const optionsChart: any = {
       
       lineSmooth: Chartist.Interpolation.cardinal({ tension: 10}), low: min,high:max , 
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 20},
+       height :"300px" ,
+      //  plugins: [
+      //   Chartist.plugins.ctAxisTitle({
+      //     axisX: {
+      //       axisTitle: 'Time (Hours)',
+      //       axisClass: 'ct-axis-title',
+            
+            
+      //     },
+      //     axisY: {
+      //       axisTitle:yaxisLabel ,
+      //       axisClass: 'ct-axis-title',
+           
+      //       flipTitle: false
+      //     }
+      //   })
+      // ]
     }
   
      var Chart = new Chartist.Line("#Temperature", dataChart, optionsChart);
+    
      this.startAnimationForLineChart(Chart);
     
   }
@@ -235,16 +256,19 @@ export class TodaysWeatherComponent implements OnInit {
   changeGraph(type) {
     if(type=='temp') 
     {
-        this.onGraphLoadFirst(this.timeArray,this.tempArray,60,90)
+        this.onGraphLoadFirst(this.timeArray,this.tempArray,40,100,this.ylabel)
         this.myClass="tempClass" ;
+        this.ylabel ="Temperature (F) "
     }
     else if (type=="wind"){
-      this.onGraphLoadFirst(this.timeArray,this.windSpeedArray,0,50)
+      this.onGraphLoadFirst(this.timeArray,this.windSpeedArray,0,50,this.ylabel)
       this.myClass="windClass"
+      this.ylabel ="Wind speed (Mph) "
     }
     else if(type=="pressure"){
-      this.onGraphLoadFirst(this.timeArray,this.pressureArray,0,50)
-      this.myClass="pressureClass"
+      this.onGraphLoadFirst(this.timeArray,this.pressureArray,20,60,this.ylabel)
+      this.myClass="pressureClass" 
+      this.ylabel ="Pressure (Pa) "
       
     }
   }

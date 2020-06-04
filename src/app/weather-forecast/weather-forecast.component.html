@@ -23,11 +23,13 @@
                         <div class="location">Bangalore</div>
                         <div class="degree">
                           <div class="num">{{WeeklyWeatherData[0].minTemperature}}</div>
+                         
                           <!-- <div class="num">23<sup>o</sup>C</div> -->
                           <!-- icon-1 -->
                           <div class="forecast-icon">
                            
-                            <img src="{{'assets/images/icons/'+imageIcon[WeeklyWeatherData[0].weatherCondition]+'.svg'}}" alt="" width=90>
+                            <!-- <img src="{{'assets/images/icons/'+imageIcon[WeeklyWeatherData[0].weatherCondition]+'.svg'}}" alt="" width=90> -->
+                            <img src="{{'assets/images/icons/'+getImageIcon(WeeklyWeatherData[0].weatherCondition)+'.svg'}}" alt="" width=90>
                           </div>	
                         </div>
                         <br>
@@ -40,14 +42,14 @@
                     <div class="forecast " *ngFor="let data of WeeklyWeatherData| slice:0:8; let i=index">
                       
                       <div class="forecast-header" *ngIf="i!=0 ">
-                        <div class="day">{{WeeklyWeatherData[i]?.day}}
+                        <div class="day" style="font-size:9px;">{{WeeklyWeatherData[i]?.day}}
                           
                         </div>
                       </div> 
                       <div class="forecast-content" *ngIf="i!=0">
                         <div class="forecast-icon">
                            <!-- {{WeeklyWeatherData[i]?.weatherCondition}} -->
-                          <img src="{{'assets/images/icons/'+imageIcon[WeeklyWeatherData[i]?.weatherCondition]+'.svg'}}" alt="" width=48>
+                          <img src="{{'assets/images/icons/'+getImageIcon(WeeklyWeatherData[i]?.weatherCondition)+'.svg'}}" alt="" width=48>
                         </div>
                         <div class="degree" style="font-size: small;">{{WeeklyWeatherData[i].minTemperature}}</div>
                         <div class="degree" style="font-size: small;">{{WeeklyWeatherData[i].maxTemperature}}</div>
@@ -59,8 +61,15 @@
                   </div>
                 </div>
                 <h3>Weekly Temperature </h3><br><br>
-                <div class="card-body card-header-info" style="width:95%;margin-left: 20px;padding:50px;"> 
-                     <div  class="ct-chart" id="Temperature" data-x-axis="Time (Hours) " data-y-axis="Temperature (℉)" ></div>
+                <div class="card-body card-header-success " style="width:95%;margin-left: 20px;padding:50px;"> 
+                     <div  class="ct-chart" id="Temperature" data-x-axis="Time (Days) " data-y-axis="Temperature (℉)" ></div>
+               
+            
+              </div><br><br><br>
+              <h3>Weekly Wind Speed </h3><br><br>
+
+                <div class="card-body card-header-warning" style="width:95%;margin-left: 20px;padding:50px;"> 
+                     <div  class="ct-chart" id="WindSpeed" data-x-axis="Time (Days) " data-y-axis="Wind Speed (Mph)" ></div>
                
             
               </div>
